@@ -3,7 +3,36 @@ import './App.css';
 
 const requestTypes = ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
 
-// test
+const requestTypeColors = {
+  "GET": "#6BDD9A",
+  "POST": "#FFE47E",
+  "PUT": "#74AEF6",
+  "PATCH": "#C0A8E1",
+  "DELETE": "#F79A8E",
+  "HEAD": "#6BDD9A",
+  "OPTIONS": "#F15EB0",
+}
+
+const statusCodes = {
+  200: "OK",
+  201: "Created",
+  204: "No Content",
+  400: "Bad Request",
+  401: "Unauthorized",
+  403: "Forbidden",
+  404: "Not Found",
+  500: "Internal Server Error"
+};
+const statusColors = {
+  200: "#013614",
+  201: "#013614",
+  204: "#013614",
+  400: "#591B08",
+  401: "#591B08",
+  403: "#591B08",
+  404: "#591B08",
+  500: "#591B08"
+};
 
 function App() {
   const [url, setUrl] = useState('https://jsonplaceholder.typicode.com/posts');
@@ -34,13 +63,13 @@ function App() {
     <div id='App'>
       <div className='input-row'>
         <select
-          id="request-type"
           value={requestType}
           onChange={(e) => setRequestType(e.target.value)}
           className="request-type-select"
+          style={{color: requestTypeColors[requestType]}}
         >
           {requestTypes.map((type) => (
-            <option key={type} value={type}>{type}</option>
+            <option key={type} value={type} style={{color: requestTypeColors[type], fontWeight: 'bold'}}>{type}</option>
           ))}
         </select>
 
@@ -65,7 +94,8 @@ function App() {
           {JSON.stringify(response.data, null, 2)}
         </pre>
         <div id='stats' style={{ visibility: response === '' ? 'hidden' : 'visible' }}>
-          <span id="status">{response.status}</span>
+          <span id="status" style={{backgroundColor: statusColors[response.status]}}>{response.status} {statusCodes[response.status]}</span>
+          <span className="separator"></span>
           <span>{requestTime} ms</span>
         </div>
       </div>
