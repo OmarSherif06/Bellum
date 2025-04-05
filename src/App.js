@@ -3,6 +3,8 @@ import './App.css';
 
 const requestTypes = ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"]
 
+// test
+
 function App() {
   const [url, setUrl] = useState('https://jsonplaceholder.typicode.com/posts');
   const [response, setResponse] = useState('');
